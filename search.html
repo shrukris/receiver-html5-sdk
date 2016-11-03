@@ -43,9 +43,10 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
 			<ul>
 			<!--	<li class="list-inline home"><a href=".">HOME</a></li>
 				<li class="list-inline support"><a href="http://support.citrix.com">SUPPORT</a></li>-->
-            <li class="list-inline support"><input name="txtName" id="txtName" type="text" placeholder="Search SDKs" 
-            class="searchdocs">
-<a class="fa fa-search errspan"></a></li>
+				<form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+            <li class="list-inline support"><input name="q" id="txtName" type="text" placeholder="Search SDKs" 
+            class="searchdocs"><a class="fa fa-search errspan" onClick="document.forms['rtd-search-form'].submit();"></a></li>
+</form>
 				<!--<li class="list-inline"><a href="http://citrix.com/download">DOWNLOADS</a></li>-->
 			</ul>
 
@@ -110,10 +111,7 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
 
       
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">Citrix HTML5 Receiver SDK</a>
-      </nav>
+
 
       
       <div class="wy-nav-content">
