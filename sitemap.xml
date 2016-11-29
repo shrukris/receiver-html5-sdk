@@ -4,39 +4,45 @@
     
     <url>
      <loc>None/</loc>
-     <lastmod>2016-11-14</lastmod>
+     <lastmod>2016-11-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>None/citrix-receiver/</loc>
-     <lastmod>2016-11-14</lastmod>
+     <loc>None/capabilities/</loc>
+     <lastmod>2016-11-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
+        
+    <url>
+     <loc>None</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>None</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     <url>
      <loc>None/global/</loc>
-     <lastmod>2016-11-14</lastmod>
+     <lastmod>2016-11-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
+        
     
 
     
     <url>
-     <loc>None/ReceiverError/</loc>
-     <lastmod>2016-11-14</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>None/session/</loc>
-     <lastmod>2016-11-14</lastmod>
+     <loc>None/sample/</loc>
+     <lastmod>2016-11-29</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

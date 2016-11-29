@@ -4,10 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Reference guide for Citrix HTML5 Receiver SDK">
   
   
-  <title>Citrix HTML5 Receiver SDK</title>
+  
+  <title>SDK Sample - Citrix HTML5 Receiver SDK</title>
   
 
   <link rel="shortcut icon" href="
@@ -16,21 +16,25 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
   
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
-  <link rel="stylesheet" href="./css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="./css/theme_extra.css" type="text/css" />
-  <link rel="stylesheet" href="./css/highlight.css">
-  <link rel="stylesheet" href="./css/override.css" type="text/css" />
-  <link rel="stylesheet" href="./css/font-awesome.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  <link rel="stylesheet" href="../css/override.css" type="text/css" />
+  <link rel="stylesheet" href="../css/font-awesome.css" type="text/css" />
 
   
-  <script src="./js/jquery-2.1.1.min.js"></script>
-  <script src="./js/modernizr-2.8.3.min.js"></script>
-  <script type="text/javascript" src="./js/highlight.pack.js"></script>
-  <script src="./js/theme.js"></script>
-  <script src="./js/custom.js"></script>
-  <script>var base_url = '.';</script>
-  <script data-main="./mkdocs/js/search.js" src="./mkdocs/js/require.js"></script>
-
+  <script>
+    // Current page data
+    var mkdocs_page_name = "SDK Sample";
+    var mkdocs_page_input_path = "sample.md";
+    var mkdocs_page_url = "/sample/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script>
+  <script src="../js/theme.js"></script>
+  <script src="../js/custom.js"></script> 
 
   
 </head>
@@ -43,9 +47,9 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
 		</div>
 		<div class="header-top-right">
 			<ul>
-			<!--	<li class="list-inline home"><a href=".">HOME</a></li>
+			<!--	<li class="list-inline home"><a href="..">HOME</a></li>
 				<li class="list-inline support"><a href="http://support.citrix.com">SUPPORT</a></li>-->
-				<form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+				<form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
             <li class="list-inline support"><input name="q" id="txtName" type="text" placeholder="Search SDKs" 
             class="searchdocs">
 <a class="fa fa-search errspan"></a></li>
@@ -61,7 +65,7 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
     <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
       <div class="wy-side-nav-search">
         <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
 	<i class="fa fa-search"></i>
     <input type="text" name="q" placeholder="Search docs" />
   </form>
@@ -73,14 +77,14 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href=".">HDX SDK for HTML5</a>
+        <a class="" style="width:250px;" href="..">HDX SDK for HTML5</a>
         
     </li>
 <li>
           
             <li>
     <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="capabilities/">SDK Capabilities</a>
+        <a class="" style="width:250px;" href="../capabilities/">SDK Capabilities</a>
         
     </li>
 <li>
@@ -97,14 +101,14 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
         
             
     <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="ReceiverError/">ReceiverError</a>
+        <a class="" style="width:250px;" href="../ReceiverError/">ReceiverError</a>
         
     </li>
 
         
             
     <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="session/">Session</a>
+        <a class="" style="width:250px;" href="../session/">Session</a>
         
     </li>
 
@@ -119,7 +123,7 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
         
             
     <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="citrix-receiver/">Receiver</a>
+        <a class="" style="width:250px;" href="../citrix-receiver/">Receiver</a>
         
     </li>
 
@@ -129,7 +133,7 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
         
             
     <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="global/">Global</a>
+        <a class="" style="width:250px;" href="../global/">Global</a>
         
     </li>
 
@@ -138,8 +142,17 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="sample/">SDK Sample</a>
+    <li class="toctree-l1 current">
+        <span class="expli"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span><a class="current" style="width:250px;" href="./">SDK Sample</a>
+        
+            <ul style="display:none">
+            
+                <li class="toctree-l3"><a href="#sdk-example">SDK Example</a></li>
+                
+                    <li><a class="toctree-l4" href="#steps-to-run-the-sdk-sample-page">Steps to run the SDK sample page:</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -159,9 +172,11 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
         <div class="rst-content">
          <!-- <div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
+    <li><a href="..">Docs</a> &raquo;</li>
     
+      
     
+    <li>SDK Sample</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -171,19 +186,16 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
           <div role="main">
             <div class="section">
              
-
-  <h1 id="search">Search Results</h1>
-
-  <form id="content_search" action="search.html">
-    <span role="status" aria-live="polite" class="ui-helper-hidden-accessible"></span>
-    <input name="q" id="mkdocs-search-query" type="text" class="search_input search-query ui-autocomplete-input" placeholder="Search the Docs" autocomplete="off" autofocus>
-  </form>
-
-  <div id="mkdocs-search-results">
-    Sorry, page not found.
-  </div>
-
-
+                <h1 id="sdk-example"><a class="toclink" href="#sdk-example">SDK Example</a></h1>
+<p>Refer the end-to-end example in the download. This <a href="https://www.citrix.com/downloads/citrix-receiver/html5/receiver-for-html5-sdk-latest#ctx-dl-eula">link</a> contains examples to integrate with StoreFront SDK and Receiver for HTML5 SDK.</p>
+<h2 id="steps-to-run-the-sdk-sample-page"><a class="toclink" href="#steps-to-run-the-sdk-sample-page">Steps to run the SDK sample page:</a></h2>
+<ul>
+<li>Copy all 3 files from <code>CitrixReceiverHTML5SDK_2.2.zip</code> to Receiver for Web root folder</li>
+<li>Copy SDKExample.html from <code>CitrixReceiverHTML5SDK_2.2_Example.zip</code> to the Receiver for Web root folder</li>
+<li>Open the StoreFront admin console, select the Authentication node and click "Add/Remove Methods". Enable "HTTP Basic"</li>
+<li>Navigate to the SDKExample.html in a Web browser</li>
+</ul>
+              
                
             </div>
           </div>
@@ -198,6 +210,8 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
 <!--<div class="rst-versions" role="note" style="cursor: pointer">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
+      
+        <span class="prev"><a href="../global/"><i class="fa fa-angle-left"></i> Previous</a></span>
       
       
     </span>

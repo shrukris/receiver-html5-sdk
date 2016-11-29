@@ -7,7 +7,7 @@
   
   
   
-  <title>ReceiverError - Citrix HTML5 Receiver SDK</title>
+  <title>SDK Capabilities - Citrix HTML5 Receiver SDK</title>
   
 
   <link rel="shortcut icon" href="
@@ -25,9 +25,9 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
   
   <script>
     // Current page data
-    var mkdocs_page_name = "ReceiverError";
-    var mkdocs_page_input_path = "ReceiverError.md";
-    var mkdocs_page_url = "/ReceiverError/";
+    var mkdocs_page_name = "SDK Capabilities";
+    var mkdocs_page_input_path = "capabilities.md";
+    var mkdocs_page_url = "/capabilities/";
   </script>
   
   <script src="../js/jquery-2.1.1.min.js"></script>
@@ -83,8 +83,27 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
 <li>
           
             <li>
-    <li class="toctree-l1 ">
-        <a class="" style="width:250px;" href="../capabilities/">SDK Capabilities</a>
+    <li class="toctree-l1 current">
+        <span class="expli"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span><a class="current" style="width:250px;" href="./">SDK Capabilities</a>
+        
+            <ul style="display:none">
+            
+                <li class="toctree-l3"><a href="#session-launch">Session Launch</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#html5-receiver-events">HTML5 Receiver Events</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#ui-customizations">UI Customizations</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#session-operations">Session Operations</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#session-disconnect">Session disconnect</a></li>
+                
+            
+            </ul>
         
     </li>
 <li>
@@ -100,17 +119,8 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
 
         
             
-    <li class="toctree-l1 current">
-        <span class="expli"><i class="fa fa-plus-square-o" aria-hidden="true"></i></span><a class="current" style="width:250px;" href="./">ReceiverError</a>
-        
-            <ul style="display:none">
-            
-                <li class="toctree-l3"><a href="#class-receivererror">Class: ReceiverError</a></li>
-                
-                    <li><a class="toctree-l4" href="#receivererror">ReceiverError</a></li>
-                
-            
-            </ul>
+    <li class="toctree-l1 ">
+        <a class="" style="width:250px;" href="../ReceiverError/">ReceiverError</a>
         
     </li>
 
@@ -175,16 +185,8 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
     <li><a href="..">Docs</a> &raquo;</li>
     
       
-        
-          <li>API Reference &raquo;</li>
-        
-      
-        
-          <li>Class &raquo;</li>
-        
-      
     
-    <li>ReceiverError</li>
+    <li>SDK Capabilities</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -194,16 +196,43 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
           <div role="main">
             <div class="section">
              
-                <h1 id="class-receivererror"><a class="toclink" href="#class-receivererror">Class: ReceiverError</a></h1>
-<h2 id="receivererror"><a class="toclink" href="#receivererror">ReceiverError</a></h2>
-<p>new ReceiverError()</p>
-<h3 id="members"><a class="toclink" href="#members">Members</a></h3>
-<p><span class="type-signature">(static) </span> this.description</p>
-<h4 id="properties"><a class="toclink" href="#properties">Properties:</a></h4>
-<p><table class=props><thead><tr><th>Name<th>Type<th class=last>Description<tbody><tr><td class=name><code>description</code><td class=type><span class=param-type>String</span><td class="last description">Description of the error.</table></p>
-<p><span class="type-signature">(static) </span> this.type</p>
-<h4 id="properties_1"><a class="toclink" href="#properties_1">Properties:</a></h4>
-<p><table class=props><thead><tr><th>Name<th>Type<th class=last>Description<tbody><tr><td class=name><code>type</code><td class=type><span class=param-type>String</span><td class="last description">Type of the error.</table></p>
+                <h2 id="session-launch"><a class="toclink" href="#session-launch">Session Launch</a></h2>
+<p>Currently Receiver for Web launches the HTML5 HDX session in a new tab. This API allows HTML5 HDX session to be embedded within a website or to be opened in a new tab.</p>
+<h2 id="html5-receiver-events"><a class="toclink" href="#html5-receiver-events">HTML5 Receiver Events</a></h2>
+<p>HTML5 HDX session provides a set of events for the website to give better control on the session with respect to various connection states, errors and URL redirection. The user experience with the HDX session can be customized using the events.</p>
+<h2 id="ui-customizations"><a class="toclink" href="#ui-customizations">UI Customizations</a></h2>
+<p>It is possible to leverage the embedding of the session along with the receiver events to achieve some of the UI customizations mentioned below to build preferred experience:</p>
+<ol>
+<li>
+<p>Session connection experience</p>
+<blockquote>
+<ul>
+<li>Custom connection experience could be built using the various connection events.</li>
+</ul>
+</blockquote>
+</li>
+<li>
+<p>Error dialog customization</p>
+<blockquote>
+<ul>
+<li>Suppress error dialog shown by Receiver for HTML5 and show the custom error dialog: When the session is embedded within the website, custom error UI that aligns with the website could be shown using the error events and suppressing the error dialog shown by HTML5 receiver using the configuration options.</li>
+<li>Error dialog shown by HTML5 receiver with custom error message: Error messages in the locales folder can be edited which will be picked by error dialog shown by HTML5 receiver.</li>
+<li>URL Redirection dialog customization URL redirection can be customized by the website using the urlredirection events and suppressing the URL redirection dialog shown by HTML5 receiver using the configuration options.</li>
+<li>Session close UI customization Action on disconnecting the session can be customized using the API params, so that session can be closed with/without prompting user. Also web site can be configured to redirect to a specified URL after session close</li>
+</ul>
+</blockquote>
+</li>
+</ol>
+<h2 id="session-operations"><a class="toclink" href="#session-operations">Session Operations</a></h2>
+<blockquote>
+<ul>
+<li>Change active session resolution API allows the session resolution to be changed dynamically</li>
+<li>Send key combinations to session More useful special key combinations can be sent to the active session. For 1example, Ctrl+Alt+Del, F5 , Home, end etc…</li>
+<li>Add/remove custom toolbar buttons Custom toolbar buttons can be added/removed as primary/secondary menu items to an active session</li>
+</ul>
+</blockquote>
+<h2 id="session-disconnect"><a class="toclink" href="#session-disconnect">Session disconnect</a></h2>
+<p>Website could disconnect to the session using this API. This is more helpful when the in-session toolbar is hidden.</p>
               
                
             </div>
@@ -220,10 +249,10 @@ https://www.citrix.com/etc/designs/citrix/icon-favicon.png">
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span class="prev"><a href="../capabilities/"><i class="fa fa-angle-left"></i> Previous</a></span>
+        <span class="prev"><a href=".."><i class="fa fa-angle-left"></i> Previous</a></span>
       
       
-        <span class="next"><a href="../session/">Next <i class="fa fa-angle-right"></i></a></span>
+        <span class="next"><a href="../ReceiverError/">Next <i class="fa fa-angle-right"></i></a></span>
       
     </span>
 	<div class="footer-right">

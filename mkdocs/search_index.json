@@ -3,7 +3,7 @@
         {
             "location": "/", 
             "text": "HDX SDK for HTML5\n\n\nIntroduction\n\n\nCitrix Receiver for HTML5 enhances support for HDX and SDK sessions by enabling you to customize your delivery model for Citrix hosted apps and desktops through your website. This feature is particularly useful for building a rich app experience in your Enterprise portals. It can be used to provide a rich app experience for users as a service when hosting Citrix Receiver for HTML5 on your web server while launching Citrix hosted apps and desktops from your website.\n\n\nGetting Started\n\n\n\n\nCopy \nCitrixHTML5SDK.js\n, \nHDXLauncher.js\n, \nHDXEngine.html\n files to the\n    same folder as the parent HTML page.\n\n\nInclude \nCitrixHTML5SDK.js\n in parent HTML page.\n\n\nSet the full path of HTML5 Client.\n\n\nSet the connection parameters for launching the session.\n\n\nAttach the events if required.\n\n\nStart the session by passing ICA. You can refer to \nStoreFront Web APIs\n to fetch ICA.\n\n\n\n\nClick \nhere\n to access the full API documentation.", 
-            "title": "Citrix Recevier for HTML5 SDK"
+            "title": "HDX SDK for HTML5"
         }, 
         {
             "location": "/#hdx-sdk-for-html5", 
@@ -21,134 +21,34 @@
             "title": "Getting Started"
         }, 
         {
-            "location": "/citrix-receiver/", 
-            "text": "Namespace: receiver\n\n\nreceiver\n\n\ncitrix.receiver\n\n\nMembers\n\n\n(readonly) \napiVersion\n \n\n\nProperties:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\napiVersion\n\n\nString\n\n\nHTML5 receiver API version.\n\n\n\n\n\n\n\n\nMethods\n\n\n(static) \ncreateSession\n(id\nopt\n, connectionParams, onSessionCreated)\n\n\nCreates a new session and returns session instance through callback. Use session instance to start the session, register and handle events and to disconnect the session.\n\n\nParameters:\n\n\nName\nType\nAttributes\nDescription\nid\nstring\noptional\nID that is assigned when the session is created.\nconnectionParams\nconnectionParams\nConfiguration options to create the session.\nonSessionCreated\nonSessionCreated\nCallback containing the session object created.\nSignature sample below:\nfunction \nfunction_name\n(session_object){\u2026}\n\n\nThrows:\n\n\nUnable to create session object.\n\n\nType \n\n\nReceiverError\n\n\nExample\n\n\nFollowing code launches an app/desktop in an iframe. Setting preferences to hide the in-session toolbar.\n\n\ntry\n{\n\n    \ncitrix\n.\nreceiver\n.\nsetPath\n(\nhttp://html5client_hosted_url/\n);\n\n    \nvar\n \nid\n \n=\n \nsession1\n;\n \n//Optional parameter\n\n    \nvar\n \nconnectionParams\n \n=\n \n{\n\n            \nlaunchType\n \n:\n \nembed\n,\n\n            \ncontainer\n \n:\n \n{\n\n                \ntype\n \n:\n \niframe\n,\n\n                \nvalue\n \n:\n \nsessionIframe\n\n            \n},\n\n            \npreferences\n \n:\n \n{\n\n                \nui\n \n:\n \n{\n\n                    \ntoolbar\n \n:\n \n{\n\n                        \nmenubar\n \n:\n \nfalse\n\n                    \n}\n\n                \n}\n\n            \n}\n\n        \n};\n\n    \nfunction\n \nsessionCreated\n(\nsessionObject\n){\n\n\n        \n//Handle session interactions like events, start, disconnect here.              \n\n        \n// Adding onConnection event handler\n\n        \nfunction\n \nconnectionHandler\n(\nevent\n){\n\n            \nconsole\n.\nlog\n(\nEvent Received : \n \n+\n \nevent\n.\ntype\n);\n\n            \nconsole\n.\nlog\n(\nevent\n.\ndata\n);\n        \n        \n}\n               \n        \nsessionObject\n.\naddListener\n(\nonConnection\n,\nconnectionHandler\n);\n\n        \n// Adding onConnectionClosed event handler\n\n        \nfunction\n \nconnectionClosedHandler\n(\nevent\n){\n\n            \nconsole\n.\nlog\n(\nEvent Received : \n \n+\n \nevent\n.\ntype\n);\n      \n            \nconsole\n.\nlog\n(\nevent\n.\ndata\n);\n        \n        \n}\n\n        \nsessionObject\n.\naddListener\n(\nonConnectionClosed\n,\nconnectionClosedHandler\n);\n\n\n        \n// Adding onError event handler\n\n        \nfunction\n \nonErrorHandler\n(\nevent\n){\n\n            \nconsole\n.\nlog\n(\nEvent Received : \n \n+\n \nevent\n.\ntype\n);\n      \n            \nconsole\n.\nlog\n(\nevent\n.\ndata\n);\n\n        \n}\n\n        \nsessionObject\n.\naddListener\n(\nonError\n,\nonErrorHandler\n);\n\n\n        \n//Adding onURLRedirection event handler\n\n        \nfunction\n \nonURLRedirectionHandler\n(\nevent\n){\n\n            \nconsole\n.\nlog\n(\nEvent Received : \n \n+\n \nevent\n.\ntype\n);\n      \n            \nconsole\n.\nlog\n(\nevent\n.\ndata\n);\n\n        \n}\n\n        \nsessionObject\n.\naddListener\n(\nonURLRedirection\n,\nonURLRedirectionHandler\n);\n\n\n        \n//ICADATA has been constructed for example. Recommending to use StoreFront/WebInterface SDK to get ICA. \n\n        \n//Refer session.start() for more details.\n\n        \nvar\n \nicaData\n \n=\n \n{\n\n            \nDomain\n:\nabcd\n,\n\n            \nClearPassword\n:\nxxxxxxxxx\n,\n\n            \nInitialProgram\n:\n#Desktop\n,\n\n            \nTitle\n:\nDesktop\n,\n\n            \nAddress\n:\nxx.xx.xx.xx\n,\n\n            \nUsername\n:\nxyz\n                \n        \n};\n\n        \nvar\n \nlaunchData\n \n=\n \n{\ntype\n \n:\njson\n,\nvalue\n \n:\nicaData\n};\n   \n        \nsessionObject\n.\nstart\n(\nlaunchData\n);\n\n    \n}\n\n    \ncitrix\n.\nreceiver\n.\ncreateSession\n(\nid\n,\nconnectionParams\n,\nsessionCreated\n);\n\n\n}\ncatch\n(\nex\n){\n\n    \nconsole\n.\nlog\n(\nex\n);\n\n\n}\n\n\n\n\n\n\nMethods\n\n\n(static) \nsetPath\n(path)\n {#.setPath .name}\n\n\nSets the HTML5Engine Path. Must be set before creating a session.  \n\n\nParameters:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\npath\n\n\nstring\n\n\nPath of HTML5Client folder.\n\n\n\n\n\n\n\n\nThrows:\n\n\nPath is empty.\n\n\n\n\n\nType \n\n\nReceiverError\n\n\n(static) \nviewLog\n()\n {#.viewLog .name}\n\n\nOpens the logging page in a new tab.HTML5Engine Path should be set\nbefore calling this API.\n\n\nThrows:\n\n\nHTML5 Engine Path is not set.\n\n\nType\n\n\nReceiverError", 
-            "title": "Receiver"
+            "location": "/capabilities/", 
+            "text": "Session Launch\n\n\nCurrently Receiver for Web launches the HTML5 HDX session in a new tab. This API allows HTML5 HDX session to be embedded within a website or to be opened in a new tab.\n\n\nHTML5 Receiver Events\n\n\nHTML5 HDX session provides a set of events for the website to give better control on the session with respect to various connection states, errors and URL redirection. The user experience with the HDX session can be customized using the events.\n\n\nUI Customizations\n\n\nIt is possible to leverage the embedding of the session along with the receiver events to achieve some of the UI customizations mentioned below to build preferred experience:\n\n\n\n\n\n\nSession connection experience\n\n\n\n\n\n\nCustom connection experience could be built using the various connection events.\n\n\n\n\n\n\n\n\n\n\nError dialog customization\n\n\n\n\n\n\nSuppress error dialog shown by Receiver for HTML5 and show the custom error dialog: When the session is embedded within the website, custom error UI that aligns with the website could be shown using the error events and suppressing the error dialog shown by HTML5 receiver using the configuration options.\n\n\nError dialog shown by HTML5 receiver with custom error message: Error messages in the locales folder can be edited which will be picked by error dialog shown by HTML5 receiver.\n\n\nURL Redirection dialog customization URL redirection can be customized by the website using the urlredirection events and suppressing the URL redirection dialog shown by HTML5 receiver using the configuration options.\n\n\nSession close UI customization Action on disconnecting the session can be customized using the API params, so that session can be closed with/without prompting user. Also web site can be configured to redirect to a specified URL after session close\n\n\n\n\n\n\n\n\n\n\nSession Operations\n\n\n\n\n\n\nChange active session resolution API allows the session resolution to be changed dynamically\n\n\nSend key combinations to session More useful special key combinations can be sent to the active session. For 1example, Ctrl+Alt+Del, F5 , Home, end etc\u2026\n\n\nAdd/remove custom toolbar buttons Custom toolbar buttons can be added/removed as primary/secondary menu items to an active session\n\n\n\n\n\n\nSession disconnect\n\n\nWebsite could disconnect to the session using this API. This is more helpful when the in-session toolbar is hidden.", 
+            "title": "SDK Capabilities"
         }, 
         {
-            "location": "/citrix-receiver/#namespace-receiver", 
-            "text": "", 
-            "title": "Namespace: receiver"
+            "location": "/capabilities/#session-launch", 
+            "text": "Currently Receiver for Web launches the HTML5 HDX session in a new tab. This API allows HTML5 HDX session to be embedded within a website or to be opened in a new tab.", 
+            "title": "Session Launch"
         }, 
         {
-            "location": "/citrix-receiver/#receiver", 
-            "text": "citrix.receiver", 
-            "title": "receiver"
+            "location": "/capabilities/#html5-receiver-events", 
+            "text": "HTML5 HDX session provides a set of events for the website to give better control on the session with respect to various connection states, errors and URL redirection. The user experience with the HDX session can be customized using the events.", 
+            "title": "HTML5 Receiver Events"
         }, 
         {
-            "location": "/citrix-receiver/#members", 
-            "text": "(readonly)  apiVersion", 
-            "title": "Members"
+            "location": "/capabilities/#ui-customizations", 
+            "text": "It is possible to leverage the embedding of the session along with the receiver events to achieve some of the UI customizations mentioned below to build preferred experience:    Session connection experience    Custom connection experience could be built using the various connection events.      Error dialog customization    Suppress error dialog shown by Receiver for HTML5 and show the custom error dialog: When the session is embedded within the website, custom error UI that aligns with the website could be shown using the error events and suppressing the error dialog shown by HTML5 receiver using the configuration options.  Error dialog shown by HTML5 receiver with custom error message: Error messages in the locales folder can be edited which will be picked by error dialog shown by HTML5 receiver.  URL Redirection dialog customization URL redirection can be customized by the website using the urlredirection events and suppressing the URL redirection dialog shown by HTML5 receiver using the configuration options.  Session close UI customization Action on disconnecting the session can be customized using the API params, so that session can be closed with/without prompting user. Also web site can be configured to redirect to a specified URL after session close", 
+            "title": "UI Customizations"
         }, 
         {
-            "location": "/citrix-receiver/#properties", 
-            "text": "Name  Type  Description      apiVersion  String  HTML5 receiver API version.", 
-            "title": "Properties:"
+            "location": "/capabilities/#session-operations", 
+            "text": "Change active session resolution API allows the session resolution to be changed dynamically  Send key combinations to session More useful special key combinations can be sent to the active session. For 1example, Ctrl+Alt+Del, F5 , Home, end etc\u2026  Add/remove custom toolbar buttons Custom toolbar buttons can be added/removed as primary/secondary menu items to an active session", 
+            "title": "Session Operations"
         }, 
         {
-            "location": "/citrix-receiver/#methods", 
-            "text": "(static)  createSession (id opt , connectionParams, onSessionCreated)  Creates a new session and returns session instance through callback. Use session instance to start the session, register and handle events and to disconnect the session.", 
-            "title": "Methods"
-        }, 
-        {
-            "location": "/citrix-receiver/#parameters", 
-            "text": "Name Type Attributes Description id string optional ID that is assigned when the session is created. connectionParams connectionParams Configuration options to create the session. onSessionCreated onSessionCreated Callback containing the session object created. Signature sample below: function  function_name (session_object){\u2026}", 
-            "title": "Parameters:"
-        }, 
-        {
-            "location": "/citrix-receiver/#throws", 
-            "text": "Unable to create session object.  Type   ReceiverError", 
-            "title": "Throws:"
-        }, 
-        {
-            "location": "/citrix-receiver/#example", 
-            "text": "Following code launches an app/desktop in an iframe. Setting preferences to hide the in-session toolbar.  try { \n     citrix . receiver . setPath ( http://html5client_hosted_url/ ); \n     var   id   =   session1 ;   //Optional parameter \n     var   connectionParams   =   { \n             launchType   :   embed , \n             container   :   { \n                 type   :   iframe , \n                 value   :   sessionIframe \n             }, \n             preferences   :   { \n                 ui   :   { \n                     toolbar   :   { \n                         menubar   :   false \n                     } \n                 } \n             } \n         }; \n     function   sessionCreated ( sessionObject ){ \n\n         //Handle session interactions like events, start, disconnect here.               \n         // Adding onConnection event handler \n         function   connectionHandler ( event ){ \n             console . log ( Event Received :    +   event . type ); \n             console . log ( event . data );         \n         }                \n         sessionObject . addListener ( onConnection , connectionHandler ); \n         // Adding onConnectionClosed event handler \n         function   connectionClosedHandler ( event ){ \n             console . log ( Event Received :    +   event . type );       \n             console . log ( event . data );         \n         } \n         sessionObject . addListener ( onConnectionClosed , connectionClosedHandler ); \n\n         // Adding onError event handler \n         function   onErrorHandler ( event ){ \n             console . log ( Event Received :    +   event . type );       \n             console . log ( event . data ); \n         } \n         sessionObject . addListener ( onError , onErrorHandler ); \n\n         //Adding onURLRedirection event handler \n         function   onURLRedirectionHandler ( event ){ \n             console . log ( Event Received :    +   event . type );       \n             console . log ( event . data ); \n         } \n         sessionObject . addListener ( onURLRedirection , onURLRedirectionHandler ); \n\n         //ICADATA has been constructed for example. Recommending to use StoreFront/WebInterface SDK to get ICA.  \n         //Refer session.start() for more details. \n         var   icaData   =   { \n             Domain : abcd , \n             ClearPassword : xxxxxxxxx , \n             InitialProgram : #Desktop , \n             Title : Desktop , \n             Address : xx.xx.xx.xx , \n             Username : xyz                 \n         }; \n         var   launchData   =   { type   : json , value   : icaData };    \n         sessionObject . start ( launchData ); \n     } \n     citrix . receiver . createSession ( id , connectionParams , sessionCreated );  } catch ( ex ){ \n     console . log ( ex );  }", 
-            "title": "Example"
-        }, 
-        {
-            "location": "/citrix-receiver/#methods_1", 
-            "text": "(static)  setPath (path)  {#.setPath .name}  Sets the HTML5Engine Path. Must be set before creating a session.", 
-            "title": "Methods"
-        }, 
-        {
-            "location": "/citrix-receiver/#parameters_1", 
-            "text": "Name  Type  Description      path  string  Path of HTML5Client folder.", 
-            "title": "Parameters:"
-        }, 
-        {
-            "location": "/citrix-receiver/#throws_1", 
-            "text": "Path is empty.  Type   ReceiverError  (static)  viewLog ()  {#.viewLog .name}  Opens the logging page in a new tab.HTML5Engine Path should be set\nbefore calling this API.", 
-            "title": "Throws:"
-        }, 
-        {
-            "location": "/citrix-receiver/#throws_2", 
-            "text": "HTML5 Engine Path is not set.  Type  ReceiverError", 
-            "title": "Throws:"
-        }, 
-        {
-            "location": "/global/", 
-            "text": "Global\n\n\nType Definitions\n\n\nconnectionParams\n\n\nConfiguration options to create the session.\n\n\nType:\n\n\n\n\n\n\nObject\n\n\n\n\n\n\nProperties:\n\n\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nconnectionParams\n \nObject\n \n \nProperties\n \n \n \nName\n \nType\n \nAttributes\n \nDescription\n \n \n \n \nlaunchType\n \nString\n \n \noptional\nTakes \"newtab\" or \"embed\" as value. Defaults to \"newtab\". \n\"newtab\" - launches the session in a new tab.\n\"embed\" - Opens the session in an Iframe.\n \ncontainer\n \nObject\n \n \nSpecifies the ID and the type of container for the session when launchType is embed. \nProperties\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nid\n \nString\n \nID of the iframe element to embed the session. Mandatory parameter when launchType is embed.\n \ntype\n \nString\n \nType of the element to embed the session. Should be set to \"iframe\".\n \n \nbounds\n \nObject\n \n \noptional\nSets a fixed width and height to the session. \nProperties\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nautoresize\n \nboolean\n \nShould be set to false to give fixed width and height to session. By default, this value is set to true in which case the session is resized to match the size of iframe element or the tab.\n \nwidth\n \nNumber\n \nWidth of the session specified in pixels. This value will be set only when autoresize is set to false.\n \nheight\n \nNumber\n \nHeight of the session specified in pixels. This value will be set only when autoresize is set to false.\n \n \ncloseOptions\n \nObject\n \n \noptional\nAction on disconnecting the session. Defaults to type=\"close\". \nProperties\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \ntype\n \nString\n \nSpecifies the type of action.\ntype=\u201dredirectUrl\u201d would redirect the tab to the URL specified in value.\ntype=\u201dclose\u201d would set the iframe src to \"about:blank\" when launchType is \"embed\" and closes the tab when launchType is \"newtab\".\n \nvalue\n \nString\n \nSpecifies the URL to be redirected. When type is set to \"close\",this value would be ignored.\n \nshowDisconnectAlert\n \nboolean\n \nA prompt would be shown to the user to stay/leave the current page when the session is about to disconnect due to the actions like close/reload of the tab. \nIf the value is set to true then the prompt is displayed otherwise prompt won't be shown. \nDefault value is true.\n \n \npreferredLang\n \nString\n \n \noptional\nSpecifies the preferred language code to be used inside the session. If the language code specified is either invalid or unsupported then it falls back to \"en\". \nSupported language codes : en, de, es, fr, ja, ko, ru, zh, zh-cn, zh-tw \nIf the value is unspecified then the browser's language code is used.\n \npreferences\n \nObject\n \n \noptional\nJSON to hide/show toolbar or individual toolbar items, suppressing the FTU, URLRedirection and error dialog.\nRefer to the example below.\n \n\n\nExample\n\n\nconnectionParams\n \nfull\n \nexample\n\n\n{\n\n    \nlaunchType\n \n:\n \nembed\n,\n\n    \ncontainer\n \n:\n \n{\n\n        \nid\n \n:\n \niframe id\n,\n\n        \ntype\n \n:\n \niframe\n\n    \n},\n\n    \nbounds\n \n:{\n\n        \nautoresize\n:\nfalse\n,\n\n        \nwidth\n:\n \n800\n,\n\n        \nheight\n:\n600\n\n    \n},\n  \n    \ncloseOptions\n \n:\n \n{\n\n        \ntype\n \n:\n \nredirecturl\n,\n\n        \nvalue\n:\n \nurl to redirect\n,\n\n        \nshowDisconnectAlert\n \n:\n \ntrue\n \n//false won\nt prompt when the session is about to disconnect due to the actions like close/reload of the tab.\n\n    \n},\n\n    \npreferredLang\n \n:\n \nja\n,\n \n//Setting to Japanese\n\n    \npreferences\n \n:\n \n{\n\n        \nui\n \n:\n \n{\n\n            \ntoolbar\n \n:\n \n{\n\n                \nmenubar\n:\ntrue\n,\n \n//false - hides the toolbar\n\n                \nclipboard\n:\ntrue\n,\n \n//false - hides the clipboard button from toolbar         \n\n                \nfileTransfer\n:\ntrue\n,\n \n//false - hides the file upload and download buttons from toolbar\n\n                \nabout\n:\ntrue\n,\n \n//false - hides the about button from toolbar\n\n                \nlock\n:\ntrue\n,\n \n//false - hides the ctrl+alt+del button from toolbar\n\n                \ndisconnect\n:\ntrue\n,\n \n//false - hides the disconnect button from toolbar\n\n                \nlogoff\n:\ntrue\n,\n \n// false - hides the logoff button from toolbar\n\n                \nfullscreen\n:\ntrue\n,\n \n//false - hides the fullscreen button from toolbar\n\n                \nkeyboard\n:\ntrue\n,\n \n//false - hides the keyboard button from toolbar, this button appears only in touch devices\n\n                \nmultitouch\n:\ntrue\n,\n \n//false - hides the multitouch button from toolbar, this button appears only in touch devices\n\n                \nswitchApp\n:\ntrue\n,\n \n//false - hides the switchApp button from toolbar, this button appears only for apps session\n\n                \npreferences\n:\ntrue\n,\n \n//false - hides the preferences button from toolbar\n\n                \ngestureGuide\n:\ntrue\n \n//false - hides the gestureGuide button from toolbar, this button appears only in touch devices\n\n            \n},\n\n            \nhide\n:{\n\n                \nurlredirection\n \n:\n \nfalse\n,\n \n//true - hides the urlredirection dialog shown by HTML5 Engine\n\n                \nerror\n \n:\n \nfalse\n,\n \n//true - hides the error dialog shown by HTML5 Engine\n\n                \nftu\n \n:\n \nfalse\n \n//true - hides the FTU(first time user dialog) shown by HTML5 Engine\n\n            \n},\n\n            \nappSwitcher\n:\n \n{\n\n                \nshowTaskbar\n:\n \ntrue\n,\n \n//false - disables the desktop appSwitcher/taskbar seen at the bottom \n\n                \nautoHide\n:\n \nfalse\n,\n \n//true - selects the Auto Hide checkbox present in the context menu of desktop appSwitcher/taskbar at the bottom  \n\n                \nshowIconsOnly\n:\n \nfalse\n \n//true - selects the Show Icons only checkbox present in the context menu of desktop appSwitcher/taskbar at the bottom  \n\n            \n}\n\n        \n}\n\n    \n}\n\n\n}\n\n\n\n\n\n\neventListener\n(event)\n\n\nListener to handle the events.\n\n\nParameters:\n\n\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nevent\n \nObject\n \nObject as appropriate to the eventType registered.\n\n\n\nProperties:\n\n\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nevent.id\n \nString\n \nId of the session object.\n \nevent.type\n \nString\n \nEvent Type triggered.\n \nevent.data\n \nObject\n \nData as appropriate to the event triggered.\nonConnection\nonConnectionClosed\nonURLRedirection\nonError\n\n\n\nonSessionCreated\n\n\nCallback having the session object created.\n\n\nParameters:\n\n\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nsessionObject\n \nSession\n \nSession object to interact with the session like register and handle events, start and disconnect.\n\n\n\nExample\n\n\nfunction\n \nsessionCreated\n(\nsessionObject\n){\n\n    \n//Handle session interactions like events, start, disconnect here.  \n\n    \n//ICADATA has been constructed for example. Recommending to use StoreFront/WebInterface SDK to get ICA. \n\n    \n//Refer session.start() for more details.\n\n    \nvar\n \nicaData\n \n=\n \n{\n\n        \nDomain\n:\nabcd\n,\n\n        \nClearPassword\n:\nxxxxxxxxx\n,\n\n        \nInitialProgram\n:\n#Desktop\n,\n\n        \nTitle\n:\nDesktop\n,\n\n        \nAddress\n:\nxx.xx.xx.xx\n,\n\n        \nUsername\n:\nxyz\n                \n    \n};\n\n    \nvar\n \nlaunchData\n \n=\n \n{\ntype\n \n:\njson\n,\nvalue\n \n:\nicaData\n};\n\n    \nsessionObject\n.\nstart\n(\nlaunchData\n);\n\n\n}", 
-            "title": "Global"
-        }, 
-        {
-            "location": "/global/#global", 
-            "text": "", 
-            "title": "Global"
-        }, 
-        {
-            "location": "/global/#type-definitions", 
-            "text": "", 
-            "title": "Type Definitions"
-        }, 
-        {
-            "location": "/global/#connectionparams", 
-            "text": "Configuration options to create the session.", 
-            "title": "connectionParams"
-        }, 
-        {
-            "location": "/global/#type", 
-            "text": "Object", 
-            "title": "Type:"
-        }, 
-        {
-            "location": "/global/#properties", 
-            "text": "Name   Type   Description         connectionParams   Object", 
-            "title": "Properties:"
-        }, 
-        {
-            "location": "/global/#example", 
-            "text": "connectionParams   full   example  { \n     launchType   :   embed , \n     container   :   { \n         id   :   iframe id , \n         type   :   iframe \n     }, \n     bounds   :{ \n         autoresize : false , \n         width :   800 , \n         height : 600 \n     },   \n     closeOptions   :   { \n         type   :   redirecturl , \n         value :   url to redirect , \n         showDisconnectAlert   :   true   //false won t prompt when the session is about to disconnect due to the actions like close/reload of the tab. \n     }, \n     preferredLang   :   ja ,   //Setting to Japanese \n     preferences   :   { \n         ui   :   { \n             toolbar   :   { \n                 menubar : true ,   //false - hides the toolbar \n                 clipboard : true ,   //false - hides the clipboard button from toolbar          \n                 fileTransfer : true ,   //false - hides the file upload and download buttons from toolbar \n                 about : true ,   //false - hides the about button from toolbar \n                 lock : true ,   //false - hides the ctrl+alt+del button from toolbar \n                 disconnect : true ,   //false - hides the disconnect button from toolbar \n                 logoff : true ,   // false - hides the logoff button from toolbar \n                 fullscreen : true ,   //false - hides the fullscreen button from toolbar \n                 keyboard : true ,   //false - hides the keyboard button from toolbar, this button appears only in touch devices \n                 multitouch : true ,   //false - hides the multitouch button from toolbar, this button appears only in touch devices \n                 switchApp : true ,   //false - hides the switchApp button from toolbar, this button appears only for apps session \n                 preferences : true ,   //false - hides the preferences button from toolbar \n                 gestureGuide : true   //false - hides the gestureGuide button from toolbar, this button appears only in touch devices \n             }, \n             hide :{ \n                 urlredirection   :   false ,   //true - hides the urlredirection dialog shown by HTML5 Engine \n                 error   :   false ,   //true - hides the error dialog shown by HTML5 Engine \n                 ftu   :   false   //true - hides the FTU(first time user dialog) shown by HTML5 Engine \n             }, \n             appSwitcher :   { \n                 showTaskbar :   true ,   //false - disables the desktop appSwitcher/taskbar seen at the bottom  \n                 autoHide :   false ,   //true - selects the Auto Hide checkbox present in the context menu of desktop appSwitcher/taskbar at the bottom   \n                 showIconsOnly :   false   //true - selects the Show Icons only checkbox present in the context menu of desktop appSwitcher/taskbar at the bottom   \n             } \n         } \n     }  }", 
-            "title": "Example"
-        }, 
-        {
-            "location": "/global/#eventlistenerevent", 
-            "text": "Listener to handle the events.", 
-            "title": "eventListener(event)"
-        }, 
-        {
-            "location": "/global/#parameters", 
-            "text": "Name   Type   Description         event   Object   Object as appropriate to the eventType registered.", 
-            "title": "Parameters:"
-        }, 
-        {
-            "location": "/global/#properties_1", 
-            "text": "Name   Type   Description         event.id   String   Id of the session object.   event.type   String   Event Type triggered.   event.data   Object   Data as appropriate to the event triggered. onConnection onConnectionClosed onURLRedirection onError", 
-            "title": "Properties:"
-        }, 
-        {
-            "location": "/global/#onsessioncreated", 
-            "text": "Callback having the session object created.", 
-            "title": "onSessionCreated"
-        }, 
-        {
-            "location": "/global/#parameters_1", 
-            "text": "Name   Type   Description         sessionObject   Session   Session object to interact with the session like register and handle events, start and disconnect.", 
-            "title": "Parameters:"
-        }, 
-        {
-            "location": "/global/#example_1", 
-            "text": "function   sessionCreated ( sessionObject ){ \n     //Handle session interactions like events, start, disconnect here.   \n     //ICADATA has been constructed for example. Recommending to use StoreFront/WebInterface SDK to get ICA.  \n     //Refer session.start() for more details. \n     var   icaData   =   { \n         Domain : abcd , \n         ClearPassword : xxxxxxxxx , \n         InitialProgram : #Desktop , \n         Title : Desktop , \n         Address : xx.xx.xx.xx , \n         Username : xyz                 \n     }; \n     var   launchData   =   { type   : json , value   : icaData }; \n     sessionObject . start ( launchData );  }", 
-            "title": "Example"
+            "location": "/capabilities/#session-disconnect", 
+            "text": "Website could disconnect to the session using this API. This is more helpful when the in-session toolbar is hidden.", 
+            "title": "Session disconnect"
         }, 
         {
             "location": "/ReceiverError/", 
@@ -394,6 +294,151 @@
             "location": "/session/#example_6", 
             "text": "Sample   event   object   generated   for   onURLRedirection   event.          {    \n     id : session id , \n     type   :   onURLRedirection , \n     data :{ \n         url   :   url_received_to_redirect \n     }  }", 
             "title": "Example"
+        }, 
+        {
+            "location": "/citrix-receiver/", 
+            "text": "Namespace: receiver\n\n\nreceiver\n\n\ncitrix.receiver\n\n\nMembers\n\n\n(readonly) \napiVersion\n \n\n\nProperties:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\napiVersion\n\n\nString\n\n\nHTML5 receiver API version.\n\n\n\n\n\n\n\n\nMethods\n\n\n(static) \ncreateSession\n(id\nopt\n, connectionParams, onSessionCreated)\n\n\nCreates a new session and returns session instance through callback. Use session instance to start the session, register and handle events and to disconnect the session.\n\n\nParameters:\n\n\nName\nType\nAttributes\nDescription\nid\nstring\noptional\nID that is assigned when the session is created.\nconnectionParams\nconnectionParams\nConfiguration options to create the session.\nonSessionCreated\nonSessionCreated\nCallback containing the session object created.\nSignature sample below:\nfunction \nfunction_name\n(session_object){\u2026}\n\n\nThrows:\n\n\nUnable to create session object.\n\n\nType \n\n\nReceiverError\n\n\nExample\n\n\nFollowing code launches an app/desktop in an iframe. Setting preferences to hide the in-session toolbar.\n\n\ntry\n{\n\n    \ncitrix\n.\nreceiver\n.\nsetPath\n(\nhttp://html5client_hosted_url/\n);\n\n    \nvar\n \nid\n \n=\n \nsession1\n;\n \n//Optional parameter\n\n    \nvar\n \nconnectionParams\n \n=\n \n{\n\n            \nlaunchType\n \n:\n \nembed\n,\n\n            \ncontainer\n \n:\n \n{\n\n                \ntype\n \n:\n \niframe\n,\n\n                \nvalue\n \n:\n \nsessionIframe\n\n            \n},\n\n            \npreferences\n \n:\n \n{\n\n                \nui\n \n:\n \n{\n\n                    \ntoolbar\n \n:\n \n{\n\n                        \nmenubar\n \n:\n \nfalse\n\n                    \n}\n\n                \n}\n\n            \n}\n\n        \n};\n\n    \nfunction\n \nsessionCreated\n(\nsessionObject\n){\n\n\n        \n//Handle session interactions like events, start, disconnect here.              \n\n        \n// Adding onConnection event handler\n\n        \nfunction\n \nconnectionHandler\n(\nevent\n){\n\n            \nconsole\n.\nlog\n(\nEvent Received : \n \n+\n \nevent\n.\ntype\n);\n\n            \nconsole\n.\nlog\n(\nevent\n.\ndata\n);\n        \n        \n}\n               \n        \nsessionObject\n.\naddListener\n(\nonConnection\n,\nconnectionHandler\n);\n\n        \n// Adding onConnectionClosed event handler\n\n        \nfunction\n \nconnectionClosedHandler\n(\nevent\n){\n\n            \nconsole\n.\nlog\n(\nEvent Received : \n \n+\n \nevent\n.\ntype\n);\n      \n            \nconsole\n.\nlog\n(\nevent\n.\ndata\n);\n        \n        \n}\n\n        \nsessionObject\n.\naddListener\n(\nonConnectionClosed\n,\nconnectionClosedHandler\n);\n\n\n        \n// Adding onError event handler\n\n        \nfunction\n \nonErrorHandler\n(\nevent\n){\n\n            \nconsole\n.\nlog\n(\nEvent Received : \n \n+\n \nevent\n.\ntype\n);\n      \n            \nconsole\n.\nlog\n(\nevent\n.\ndata\n);\n\n        \n}\n\n        \nsessionObject\n.\naddListener\n(\nonError\n,\nonErrorHandler\n);\n\n\n        \n//Adding onURLRedirection event handler\n\n        \nfunction\n \nonURLRedirectionHandler\n(\nevent\n){\n\n            \nconsole\n.\nlog\n(\nEvent Received : \n \n+\n \nevent\n.\ntype\n);\n      \n            \nconsole\n.\nlog\n(\nevent\n.\ndata\n);\n\n        \n}\n\n        \nsessionObject\n.\naddListener\n(\nonURLRedirection\n,\nonURLRedirectionHandler\n);\n\n\n        \n//ICADATA has been constructed for example. Recommending to use StoreFront/WebInterface SDK to get ICA. \n\n        \n//Refer session.start() for more details.\n\n        \nvar\n \nicaData\n \n=\n \n{\n\n            \nDomain\n:\nabcd\n,\n\n            \nClearPassword\n:\nxxxxxxxxx\n,\n\n            \nInitialProgram\n:\n#Desktop\n,\n\n            \nTitle\n:\nDesktop\n,\n\n            \nAddress\n:\nxx.xx.xx.xx\n,\n\n            \nUsername\n:\nxyz\n                \n        \n};\n\n        \nvar\n \nlaunchData\n \n=\n \n{\ntype\n \n:\njson\n,\nvalue\n \n:\nicaData\n};\n   \n        \nsessionObject\n.\nstart\n(\nlaunchData\n);\n\n    \n}\n\n    \ncitrix\n.\nreceiver\n.\ncreateSession\n(\nid\n,\nconnectionParams\n,\nsessionCreated\n);\n\n\n}\ncatch\n(\nex\n){\n\n    \nconsole\n.\nlog\n(\nex\n);\n\n\n}\n\n\n\n\n\n\nMethods\n\n\n(static) \nsetPath\n(path)\n {#.setPath .name}\n\n\nSets the HTML5Engine Path. Must be set before creating a session.  \n\n\nParameters:\n\n\n\n\n\n\n\n\nName\n\n\nType\n\n\nDescription\n\n\n\n\n\n\n\n\n\n\npath\n\n\nstring\n\n\nPath of HTML5Client folder.\n\n\n\n\n\n\n\n\nThrows:\n\n\nPath is empty.\n\n\n\n\n\nType \n\n\nReceiverError\n\n\n(static) \nviewLog\n()\n {#.viewLog .name}\n\n\nOpens the logging page in a new tab.HTML5Engine Path should be set\nbefore calling this API.\n\n\nThrows:\n\n\nHTML5 Engine Path is not set.\n\n\nType\n\n\nReceiverError", 
+            "title": "Receiver"
+        }, 
+        {
+            "location": "/citrix-receiver/#namespace-receiver", 
+            "text": "", 
+            "title": "Namespace: receiver"
+        }, 
+        {
+            "location": "/citrix-receiver/#receiver", 
+            "text": "citrix.receiver", 
+            "title": "receiver"
+        }, 
+        {
+            "location": "/citrix-receiver/#members", 
+            "text": "(readonly)  apiVersion", 
+            "title": "Members"
+        }, 
+        {
+            "location": "/citrix-receiver/#properties", 
+            "text": "Name  Type  Description      apiVersion  String  HTML5 receiver API version.", 
+            "title": "Properties:"
+        }, 
+        {
+            "location": "/citrix-receiver/#methods", 
+            "text": "(static)  createSession (id opt , connectionParams, onSessionCreated)  Creates a new session and returns session instance through callback. Use session instance to start the session, register and handle events and to disconnect the session.", 
+            "title": "Methods"
+        }, 
+        {
+            "location": "/citrix-receiver/#parameters", 
+            "text": "Name Type Attributes Description id string optional ID that is assigned when the session is created. connectionParams connectionParams Configuration options to create the session. onSessionCreated onSessionCreated Callback containing the session object created. Signature sample below: function  function_name (session_object){\u2026}", 
+            "title": "Parameters:"
+        }, 
+        {
+            "location": "/citrix-receiver/#throws", 
+            "text": "Unable to create session object.  Type   ReceiverError", 
+            "title": "Throws:"
+        }, 
+        {
+            "location": "/citrix-receiver/#example", 
+            "text": "Following code launches an app/desktop in an iframe. Setting preferences to hide the in-session toolbar.  try { \n     citrix . receiver . setPath ( http://html5client_hosted_url/ ); \n     var   id   =   session1 ;   //Optional parameter \n     var   connectionParams   =   { \n             launchType   :   embed , \n             container   :   { \n                 type   :   iframe , \n                 value   :   sessionIframe \n             }, \n             preferences   :   { \n                 ui   :   { \n                     toolbar   :   { \n                         menubar   :   false \n                     } \n                 } \n             } \n         }; \n     function   sessionCreated ( sessionObject ){ \n\n         //Handle session interactions like events, start, disconnect here.               \n         // Adding onConnection event handler \n         function   connectionHandler ( event ){ \n             console . log ( Event Received :    +   event . type ); \n             console . log ( event . data );         \n         }                \n         sessionObject . addListener ( onConnection , connectionHandler ); \n         // Adding onConnectionClosed event handler \n         function   connectionClosedHandler ( event ){ \n             console . log ( Event Received :    +   event . type );       \n             console . log ( event . data );         \n         } \n         sessionObject . addListener ( onConnectionClosed , connectionClosedHandler ); \n\n         // Adding onError event handler \n         function   onErrorHandler ( event ){ \n             console . log ( Event Received :    +   event . type );       \n             console . log ( event . data ); \n         } \n         sessionObject . addListener ( onError , onErrorHandler ); \n\n         //Adding onURLRedirection event handler \n         function   onURLRedirectionHandler ( event ){ \n             console . log ( Event Received :    +   event . type );       \n             console . log ( event . data ); \n         } \n         sessionObject . addListener ( onURLRedirection , onURLRedirectionHandler ); \n\n         //ICADATA has been constructed for example. Recommending to use StoreFront/WebInterface SDK to get ICA.  \n         //Refer session.start() for more details. \n         var   icaData   =   { \n             Domain : abcd , \n             ClearPassword : xxxxxxxxx , \n             InitialProgram : #Desktop , \n             Title : Desktop , \n             Address : xx.xx.xx.xx , \n             Username : xyz                 \n         }; \n         var   launchData   =   { type   : json , value   : icaData };    \n         sessionObject . start ( launchData ); \n     } \n     citrix . receiver . createSession ( id , connectionParams , sessionCreated );  } catch ( ex ){ \n     console . log ( ex );  }", 
+            "title": "Example"
+        }, 
+        {
+            "location": "/citrix-receiver/#methods_1", 
+            "text": "(static)  setPath (path)  {#.setPath .name}  Sets the HTML5Engine Path. Must be set before creating a session.", 
+            "title": "Methods"
+        }, 
+        {
+            "location": "/citrix-receiver/#parameters_1", 
+            "text": "Name  Type  Description      path  string  Path of HTML5Client folder.", 
+            "title": "Parameters:"
+        }, 
+        {
+            "location": "/citrix-receiver/#throws_1", 
+            "text": "Path is empty.  Type   ReceiverError  (static)  viewLog ()  {#.viewLog .name}  Opens the logging page in a new tab.HTML5Engine Path should be set\nbefore calling this API.", 
+            "title": "Throws:"
+        }, 
+        {
+            "location": "/citrix-receiver/#throws_2", 
+            "text": "HTML5 Engine Path is not set.  Type  ReceiverError", 
+            "title": "Throws:"
+        }, 
+        {
+            "location": "/global/", 
+            "text": "Global\n\n\nType Definitions\n\n\nconnectionParams\n\n\nConfiguration options to create the session.\n\n\nType:\n\n\n\n\n\n\nObject\n\n\n\n\n\n\nProperties:\n\n\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nconnectionParams\n \nObject\n \n \nProperties\n \n \n \nName\n \nType\n \nAttributes\n \nDescription\n \n \n \n \nlaunchType\n \nString\n \n \noptional\nTakes \"newtab\" or \"embed\" as value. Defaults to \"newtab\". \n\"newtab\" - launches the session in a new tab.\n\"embed\" - Opens the session in an Iframe.\n \ncontainer\n \nObject\n \n \nSpecifies the ID and the type of container for the session when launchType is embed. \nProperties\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nid\n \nString\n \nID of the iframe element to embed the session. Mandatory parameter when launchType is embed.\n \ntype\n \nString\n \nType of the element to embed the session. Should be set to \"iframe\".\n \n \nbounds\n \nObject\n \n \noptional\nSets a fixed width and height to the session. \nProperties\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nautoresize\n \nboolean\n \nShould be set to false to give fixed width and height to session. By default, this value is set to true in which case the session is resized to match the size of iframe element or the tab.\n \nwidth\n \nNumber\n \nWidth of the session specified in pixels. This value will be set only when autoresize is set to false.\n \nheight\n \nNumber\n \nHeight of the session specified in pixels. This value will be set only when autoresize is set to false.\n \n \ncloseOptions\n \nObject\n \n \noptional\nAction on disconnecting the session. Defaults to type=\"close\". \nProperties\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \ntype\n \nString\n \nSpecifies the type of action.\ntype=\u201dredirectUrl\u201d would redirect the tab to the URL specified in value.\ntype=\u201dclose\u201d would set the iframe src to \"about:blank\" when launchType is \"embed\" and closes the tab when launchType is \"newtab\".\n \nvalue\n \nString\n \nSpecifies the URL to be redirected. When type is set to \"close\",this value would be ignored.\n \nshowDisconnectAlert\n \nboolean\n \nA prompt would be shown to the user to stay/leave the current page when the session is about to disconnect due to the actions like close/reload of the tab. \nIf the value is set to true then the prompt is displayed otherwise prompt won't be shown. \nDefault value is true.\n \n \npreferredLang\n \nString\n \n \noptional\nSpecifies the preferred language code to be used inside the session. If the language code specified is either invalid or unsupported then it falls back to \"en\". \nSupported language codes : en, de, es, fr, ja, ko, ru, zh, zh-cn, zh-tw \nIf the value is unspecified then the browser's language code is used.\n \npreferences\n \nObject\n \n \noptional\nJSON to hide/show toolbar or individual toolbar items, suppressing the FTU, URLRedirection and error dialog.\nRefer to the example below.\n \n\n\nExample\n\n\nconnectionParams\n \nfull\n \nexample\n\n\n{\n\n    \nlaunchType\n \n:\n \nembed\n,\n\n    \ncontainer\n \n:\n \n{\n\n        \nid\n \n:\n \niframe id\n,\n\n        \ntype\n \n:\n \niframe\n\n    \n},\n\n    \nbounds\n \n:{\n\n        \nautoresize\n:\nfalse\n,\n\n        \nwidth\n:\n \n800\n,\n\n        \nheight\n:\n600\n\n    \n},\n  \n    \ncloseOptions\n \n:\n \n{\n\n        \ntype\n \n:\n \nredirecturl\n,\n\n        \nvalue\n:\n \nurl to redirect\n,\n\n        \nshowDisconnectAlert\n \n:\n \ntrue\n \n//false won\nt prompt when the session is about to disconnect due to the actions like close/reload of the tab.\n\n    \n},\n\n    \npreferredLang\n \n:\n \nja\n,\n \n//Setting to Japanese\n\n    \npreferences\n \n:\n \n{\n\n        \nui\n \n:\n \n{\n\n            \ntoolbar\n \n:\n \n{\n\n                \nmenubar\n:\ntrue\n,\n \n//false - hides the toolbar\n\n                \nclipboard\n:\ntrue\n,\n \n//false - hides the clipboard button from toolbar         \n\n                \nfileTransfer\n:\ntrue\n,\n \n//false - hides the file upload and download buttons from toolbar\n\n                \nabout\n:\ntrue\n,\n \n//false - hides the about button from toolbar\n\n                \nlock\n:\ntrue\n,\n \n//false - hides the ctrl+alt+del button from toolbar\n\n                \ndisconnect\n:\ntrue\n,\n \n//false - hides the disconnect button from toolbar\n\n                \nlogoff\n:\ntrue\n,\n \n// false - hides the logoff button from toolbar\n\n                \nfullscreen\n:\ntrue\n,\n \n//false - hides the fullscreen button from toolbar\n\n                \nkeyboard\n:\ntrue\n,\n \n//false - hides the keyboard button from toolbar, this button appears only in touch devices\n\n                \nmultitouch\n:\ntrue\n,\n \n//false - hides the multitouch button from toolbar, this button appears only in touch devices\n\n                \nswitchApp\n:\ntrue\n,\n \n//false - hides the switchApp button from toolbar, this button appears only for apps session\n\n                \npreferences\n:\ntrue\n,\n \n//false - hides the preferences button from toolbar\n\n                \ngestureGuide\n:\ntrue\n \n//false - hides the gestureGuide button from toolbar, this button appears only in touch devices\n\n            \n},\n\n            \nhide\n:{\n\n                \nurlredirection\n \n:\n \nfalse\n,\n \n//true - hides the urlredirection dialog shown by HTML5 Engine\n\n                \nerror\n \n:\n \nfalse\n,\n \n//true - hides the error dialog shown by HTML5 Engine\n\n                \nftu\n \n:\n \nfalse\n \n//true - hides the FTU(first time user dialog) shown by HTML5 Engine\n\n            \n},\n\n            \nappSwitcher\n:\n \n{\n\n                \nshowTaskbar\n:\n \ntrue\n,\n \n//false - disables the desktop appSwitcher/taskbar seen at the bottom \n\n                \nautoHide\n:\n \nfalse\n,\n \n//true - selects the Auto Hide checkbox present in the context menu of desktop appSwitcher/taskbar at the bottom  \n\n                \nshowIconsOnly\n:\n \nfalse\n \n//true - selects the Show Icons only checkbox present in the context menu of desktop appSwitcher/taskbar at the bottom  \n\n            \n}\n\n        \n}\n\n    \n}\n\n\n}\n\n\n\n\n\n\neventListener\n(event)\n\n\nListener to handle the events.\n\n\nParameters:\n\n\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nevent\n \nObject\n \nObject as appropriate to the eventType registered.\n\n\n\nProperties:\n\n\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nevent.id\n \nString\n \nId of the session object.\n \nevent.type\n \nString\n \nEvent Type triggered.\n \nevent.data\n \nObject\n \nData as appropriate to the event triggered.\nonConnection\nonConnectionClosed\nonURLRedirection\nonError\n\n\n\nonSessionCreated\n\n\nCallback having the session object created.\n\n\nParameters:\n\n\n \n \n \nName\n \nType\n \nDescription\n \n \n \n \nsessionObject\n \nSession\n \nSession object to interact with the session like register and handle events, start and disconnect.\n\n\n\nExample\n\n\nfunction\n \nsessionCreated\n(\nsessionObject\n){\n\n    \n//Handle session interactions like events, start, disconnect here.  \n\n    \n//ICADATA has been constructed for example. Recommending to use StoreFront/WebInterface SDK to get ICA. \n\n    \n//Refer session.start() for more details.\n\n    \nvar\n \nicaData\n \n=\n \n{\n\n        \nDomain\n:\nabcd\n,\n\n        \nClearPassword\n:\nxxxxxxxxx\n,\n\n        \nInitialProgram\n:\n#Desktop\n,\n\n        \nTitle\n:\nDesktop\n,\n\n        \nAddress\n:\nxx.xx.xx.xx\n,\n\n        \nUsername\n:\nxyz\n                \n    \n};\n\n    \nvar\n \nlaunchData\n \n=\n \n{\ntype\n \n:\njson\n,\nvalue\n \n:\nicaData\n};\n\n    \nsessionObject\n.\nstart\n(\nlaunchData\n);\n\n\n}", 
+            "title": "Global"
+        }, 
+        {
+            "location": "/global/#global", 
+            "text": "", 
+            "title": "Global"
+        }, 
+        {
+            "location": "/global/#type-definitions", 
+            "text": "", 
+            "title": "Type Definitions"
+        }, 
+        {
+            "location": "/global/#connectionparams", 
+            "text": "Configuration options to create the session.", 
+            "title": "connectionParams"
+        }, 
+        {
+            "location": "/global/#type", 
+            "text": "Object", 
+            "title": "Type:"
+        }, 
+        {
+            "location": "/global/#properties", 
+            "text": "Name   Type   Description         connectionParams   Object", 
+            "title": "Properties:"
+        }, 
+        {
+            "location": "/global/#example", 
+            "text": "connectionParams   full   example  { \n     launchType   :   embed , \n     container   :   { \n         id   :   iframe id , \n         type   :   iframe \n     }, \n     bounds   :{ \n         autoresize : false , \n         width :   800 , \n         height : 600 \n     },   \n     closeOptions   :   { \n         type   :   redirecturl , \n         value :   url to redirect , \n         showDisconnectAlert   :   true   //false won t prompt when the session is about to disconnect due to the actions like close/reload of the tab. \n     }, \n     preferredLang   :   ja ,   //Setting to Japanese \n     preferences   :   { \n         ui   :   { \n             toolbar   :   { \n                 menubar : true ,   //false - hides the toolbar \n                 clipboard : true ,   //false - hides the clipboard button from toolbar          \n                 fileTransfer : true ,   //false - hides the file upload and download buttons from toolbar \n                 about : true ,   //false - hides the about button from toolbar \n                 lock : true ,   //false - hides the ctrl+alt+del button from toolbar \n                 disconnect : true ,   //false - hides the disconnect button from toolbar \n                 logoff : true ,   // false - hides the logoff button from toolbar \n                 fullscreen : true ,   //false - hides the fullscreen button from toolbar \n                 keyboard : true ,   //false - hides the keyboard button from toolbar, this button appears only in touch devices \n                 multitouch : true ,   //false - hides the multitouch button from toolbar, this button appears only in touch devices \n                 switchApp : true ,   //false - hides the switchApp button from toolbar, this button appears only for apps session \n                 preferences : true ,   //false - hides the preferences button from toolbar \n                 gestureGuide : true   //false - hides the gestureGuide button from toolbar, this button appears only in touch devices \n             }, \n             hide :{ \n                 urlredirection   :   false ,   //true - hides the urlredirection dialog shown by HTML5 Engine \n                 error   :   false ,   //true - hides the error dialog shown by HTML5 Engine \n                 ftu   :   false   //true - hides the FTU(first time user dialog) shown by HTML5 Engine \n             }, \n             appSwitcher :   { \n                 showTaskbar :   true ,   //false - disables the desktop appSwitcher/taskbar seen at the bottom  \n                 autoHide :   false ,   //true - selects the Auto Hide checkbox present in the context menu of desktop appSwitcher/taskbar at the bottom   \n                 showIconsOnly :   false   //true - selects the Show Icons only checkbox present in the context menu of desktop appSwitcher/taskbar at the bottom   \n             } \n         } \n     }  }", 
+            "title": "Example"
+        }, 
+        {
+            "location": "/global/#eventlistenerevent", 
+            "text": "Listener to handle the events.", 
+            "title": "eventListener(event)"
+        }, 
+        {
+            "location": "/global/#parameters", 
+            "text": "Name   Type   Description         event   Object   Object as appropriate to the eventType registered.", 
+            "title": "Parameters:"
+        }, 
+        {
+            "location": "/global/#properties_1", 
+            "text": "Name   Type   Description         event.id   String   Id of the session object.   event.type   String   Event Type triggered.   event.data   Object   Data as appropriate to the event triggered. onConnection onConnectionClosed onURLRedirection onError", 
+            "title": "Properties:"
+        }, 
+        {
+            "location": "/global/#onsessioncreated", 
+            "text": "Callback having the session object created.", 
+            "title": "onSessionCreated"
+        }, 
+        {
+            "location": "/global/#parameters_1", 
+            "text": "Name   Type   Description         sessionObject   Session   Session object to interact with the session like register and handle events, start and disconnect.", 
+            "title": "Parameters:"
+        }, 
+        {
+            "location": "/global/#example_1", 
+            "text": "function   sessionCreated ( sessionObject ){ \n     //Handle session interactions like events, start, disconnect here.   \n     //ICADATA has been constructed for example. Recommending to use StoreFront/WebInterface SDK to get ICA.  \n     //Refer session.start() for more details. \n     var   icaData   =   { \n         Domain : abcd , \n         ClearPassword : xxxxxxxxx , \n         InitialProgram : #Desktop , \n         Title : Desktop , \n         Address : xx.xx.xx.xx , \n         Username : xyz                 \n     }; \n     var   launchData   =   { type   : json , value   : icaData }; \n     sessionObject . start ( launchData );  }", 
+            "title": "Example"
+        }, 
+        {
+            "location": "/sample/", 
+            "text": "SDK Example\n\n\nRefer the end-to-end example in the download. This \nlink\n contains examples to integrate with StoreFront SDK and Receiver for HTML5 SDK.\n\n\nSteps to run the SDK sample page:\n\n\n\n\nCopy all 3 files from \nCitrixReceiverHTML5SDK_2.2.zip\n to Receiver for Web root folder\n\n\nCopy SDKExample.html from \nCitrixReceiverHTML5SDK_2.2_Example.zip\n to the Receiver for Web root folder\n\n\nOpen the StoreFront admin console, select the Authentication node and click \"Add/Remove Methods\". Enable \"HTTP Basic\"\n\n\nNavigate to the SDKExample.html in a Web browser", 
+            "title": "SDK Sample"
+        }, 
+        {
+            "location": "/sample/#sdk-example", 
+            "text": "Refer the end-to-end example in the download. This  link  contains examples to integrate with StoreFront SDK and Receiver for HTML5 SDK.", 
+            "title": "SDK Example"
+        }, 
+        {
+            "location": "/sample/#steps-to-run-the-sdk-sample-page", 
+            "text": "Copy all 3 files from  CitrixReceiverHTML5SDK_2.2.zip  to Receiver for Web root folder  Copy SDKExample.html from  CitrixReceiverHTML5SDK_2.2_Example.zip  to the Receiver for Web root folder  Open the StoreFront admin console, select the Authentication node and click \"Add/Remove Methods\". Enable \"HTTP Basic\"  Navigate to the SDKExample.html in a Web browser", 
+            "title": "Steps to run the SDK sample page:"
         }
     ]
 }
